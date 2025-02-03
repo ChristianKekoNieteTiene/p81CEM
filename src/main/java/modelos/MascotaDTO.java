@@ -28,6 +28,9 @@ public class MascotaDTO {
         this.idVet = idVet;
     }
 
+    public MascotaDTO() {
+    }
+
     public int getId() {
         return id;
     }

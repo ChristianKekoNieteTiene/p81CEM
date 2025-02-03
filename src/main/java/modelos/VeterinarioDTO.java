@@ -26,6 +26,9 @@ public class VeterinarioDTO {
         this.emailVet = emailVet;
     }
 
+    public VeterinarioDTO() {
+    }
+
     public int getIdVet() {
         return idVet;
     }
