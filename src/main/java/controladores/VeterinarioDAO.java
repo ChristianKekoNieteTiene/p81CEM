@@ -3,6 +3,7 @@ package controladores;
 
 import daw.Conexion;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -59,14 +60,36 @@ public class VeterinarioDAO implements IVeterinario {
         return lista;
     } 
     
-    
-    
-    
-   
-
     @Override
     public VeterinarioDTO buscarVeterinario(int pkVet) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        ResultSet res = null;
+        VeterinarioDTO vet = new VeterinarioDTO();
+
+        String sql = "select * from veterinario where id=?";
+
+        try (PreparedStatement prest = con.prepareStatement(sql)) {
+            // Preparamos la sentencia parametrizada
+            prest.setInt(1, pkVet);
+
+            // Ejecutamos la sentencia y obtenemos las filas en el objeto ResultSet
+            res = prest.executeQuery();
+
+            // Nos posicionamos en el primer registro del Resultset. Sólo debe haber una fila
+            // si existe esa pk
+            if (res.next()) {
+                // Recogemos los datos de la persona, guardamos en un objeto
+                vet.setIdVet(res.getInt("id"));
+                vet.setNifVet(res.getString("nif"));
+                vet.setDirVet(res.getString("direccion"));
+                vet.setNomVet(res.getString("nombre"));
+                vet.setTelVet(res.getString("telefono"));
+                vet.setEmailVet(res.getString("email"));
+                return vet;
+            }
+
+            return null;
+        }
     }
 
     @Override

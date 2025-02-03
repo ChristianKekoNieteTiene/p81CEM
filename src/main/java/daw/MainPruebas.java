@@ -23,5 +23,10 @@ public class MainPruebas {
         
             System.out.println("-------- Lista con datos recogidos desde la B.D -------------");
             nuevaLista.forEach(System.out::println);
+            
+            System.out.println("");
+        VeterinarioDTO veterinario = vetDao.buscarVeterinario(1);
+            System.out.println("-------- Veterinario con datos recogidos del id 1 -------------");
+            System.out.println(veterinario);
     }
 }
