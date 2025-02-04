@@ -3,6 +3,7 @@ package controladores;
 
 import daw.Conexion;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -123,11 +124,48 @@ public class VeterinarioDAO implements IVeterinario {
 
     @Override
     public int updateVet(int pkVet, VeterinarioDTO nuevosDatos) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        int numFilas = 0;
+        String sql = "update veterinario set nif=?, nombre=?, direccion=?, telefono=?,email=? where id=?";
+
+        if (buscarVeterinario(pkVet) == null) {
+            // La persona a actualizar no existe
+            return numFilas;
+        } else {
+            // Instanciamos el objeto PreparedStatement para inserción
+            // de datos. Sentencia parametrizada
+            try (PreparedStatement prest = con.prepareStatement(sql)) {
+
+                // Establecemos los parámetros de la sentencia
+                
+                prest.setString(1, nuevosDatos.getNifVet());
+                prest.setString(2, nuevosDatos.getNomVet());
+                prest.setString(3, nuevosDatos.getDirVet());
+                prest.setString(4, nuevosDatos.getTelVet());
+                prest.setString(5, nuevosDatos.getEmailVet());
+                prest.setInt(6, pkVet);
+
+                numFilas = prest.executeUpdate();
+            }
+            return numFilas;
+        }
     }
 
     @Override
     public int deleteVeterinario(int pkVet) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        int numFilas = 0;
+
+        String sql = "delete from veterinario where pk = ?";
+
+        // Sentencia parametrizada
+        try (PreparedStatement prest = con.prepareStatement(sql)) {
+
+            // Establecemos los parámetros de la sentencia
+            prest.setInt(1, pkVet);
+            // Ejecutamos la sentencia
+            numFilas = prest.executeUpdate();
+        }
+        return numFilas;
     }
 }

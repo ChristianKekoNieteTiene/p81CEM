@@ -35,6 +35,19 @@ public class MainPruebas {
             
             System.out.println("Nº personas insertadas " + vetDao.insertVet((new VeterinarioDTO(10,"hugo","niffff","direcc","teleff","email@gmail.com"))));
             
+            System.out.println("");
+            
+            System.out.println("Modificación de la persona con pk 10");
+            VeterinarioDTO v1 = new VeterinarioDTO(10,"nif", "NuevoNombre","direc","tel","@gmailsss");
+            System.out.println("Nº Personas modificadas " + 
+                    vetDao.updateVet(10, v1));
+            
+            
+            System.out.println("");
+            
+            //System.out.println("Se va a borrar la persona con pk 3");
+            //System.out.println("Nº personas borradas " + 
+                 //   daoPersona.deletePersona(new PersonaDTO(3,"Pablo Pérez", ));
             
     }
 }
