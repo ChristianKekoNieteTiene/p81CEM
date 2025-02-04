@@ -156,7 +156,7 @@ public class VeterinarioDAO implements IVeterinario {
         
         int numFilas = 0;
 
-        String sql = "delete from veterinario where pk = ?";
+        String sql = "delete from veterinario where id = ?";
 
         // Sentencia parametrizada
         try (PreparedStatement prest = con.prepareStatement(sql)) {
