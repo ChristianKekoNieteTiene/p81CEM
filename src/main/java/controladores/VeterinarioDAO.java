@@ -24,8 +24,8 @@ public class VeterinarioDAO implements IVeterinario {
         con = Conexion.getInstance();
     }
 
-    public VeterinarioDAO(int i, String a, String b, String c, String d, String e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public VeterinarioDAO(int i, String a, String b, String c, String d, String e) throws SQLException {
+        
     }
 
     @Override
@@ -46,9 +46,9 @@ public class VeterinarioDAO implements IVeterinario {
                 
                 // Recogemos los datos del veterinario, guardamos en un objeto
                 vet.setIdVet(res.getInt("id"));
+                vet.setNomVet(res.getString("nombre"));
                 vet.setNifVet(res.getString("nif"));
                 vet.setDirVet(res.getString("direccion"));
-                vet.setNomVet(res.getString("nombre"));
                 vet.setTelVet(res.getString("telefono"));
                 vet.setEmailVet(res.getString("email"));
                 
@@ -80,9 +80,9 @@ public class VeterinarioDAO implements IVeterinario {
             if (res.next()) {
                 // Recogemos los datos de la persona, guardamos en un objeto
                 vet.setIdVet(res.getInt("id"));
+                vet.setNomVet(res.getString("nombre"));
                 vet.setNifVet(res.getString("nif"));
                 vet.setDirVet(res.getString("direccion"));
-                vet.setNomVet(res.getString("nombre"));
                 vet.setTelVet(res.getString("telefono"));
                 vet.setEmailVet(res.getString("email"));
                 return vet;
@@ -94,7 +94,31 @@ public class VeterinarioDAO implements IVeterinario {
 
     @Override
     public int insertVet(VeterinarioDTO newVet) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        int numFilas = 0;
+            String sql = "insert into veterinario values (?,?,?,?,?,?)";
+
+            if (buscarVeterinario(newVet.getIdVet()) != null) {
+                // Existe un registro con esa pk
+                // No se hace la inserción
+                return numFilas;
+            } else {
+                // Instanciamos el objeto PreparedStatement para inserción
+                // de datos. Sentencia parametrizada
+                try (PreparedStatement prest = con.prepareStatement(sql)) {
+
+                    // Establecemos los parámetros de la sentencia
+                    prest.setInt(1, newVet.getIdVet());
+                    prest.setString(2, newVet.getNomVet());
+                    prest.setString(3, newVet.getNifVet());
+                    prest.setString(4, newVet.getDirVet());
+                    prest.setString(5, newVet.getTelVet());
+                    prest.setString(6, newVet.getEmailVet());
+
+                    numFilas = prest.executeUpdate();
+                }
+                return numFilas;
+            }
     }
 
     @Override
@@ -104,30 +128,6 @@ public class VeterinarioDAO implements IVeterinario {
 
     @Override
     public int deleteVeterinario(int pkVet) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private void setIdVet(int aInt) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private void setNifVet(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private void setDirVet(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private void setNomVet(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private void setTelVet(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private void setEmailVet(String string) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

@@ -11,8 +11,8 @@ import java.util.Objects;
 public class VeterinarioDTO {
     
     private int idVet;
-    private String nifVet;
     private String nomVet;
+    private String nifVet;
     private String dirVet;
     private String telVet;
     private String emailVet;
