@@ -11,10 +11,10 @@ import java.util.List;
 public interface IMascota {
     
     // Método para obtener todos los registros de la tabla
-    List<MascotaDTO> buscarMascotas() throws SQLException;
+    List<MascotaDTO> getBuscarMascotas() throws SQLException;
     
     // metodo buscar mascota por su id
-    MascotaDTO buscarMascota(int pkMascota) throws SQLException;
+    MascotaDTO getBuscarMascota(int pkMascota) throws SQLException;
     
     // Método para insertar una mascota
     int insertMasc (MascotaDTO newMasc) throws SQLException;
@@ -27,6 +27,6 @@ public interface IMascota {
     int deleteMasc (int pkMasc) throws SQLException;
     
     // método que permite obtener todas las mascotas tratadas por un veterinario, según su id.
-    List<MascotaDTO>buscarMascotas(int pkVet);
+    List<MascotaDTO>getMascotasVet(int pkVet) throws SQLException;
     
 }

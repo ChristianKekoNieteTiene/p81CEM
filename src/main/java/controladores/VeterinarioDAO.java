@@ -3,7 +3,6 @@ package controladores;
 
 import daw.Conexion;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,7 +29,7 @@ public class VeterinarioDAO implements IVeterinario {
     }
 
     @Override
-    public List<VeterinarioDTO> getAll() throws SQLException {
+    public List<VeterinarioDTO> getVeterinarios() throws SQLException {
         List<VeterinarioDTO> lista = new ArrayList<>();
 
         // Preparamos la consulta de datos mediante un objeto Statement

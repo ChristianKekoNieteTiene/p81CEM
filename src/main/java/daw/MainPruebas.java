@@ -53,14 +53,14 @@ public class MainPruebas {
 
           
             
-            LocalDate fechaNac = LocalDate.of(1970, 1, 1);
+           //LocalDate fechaNac = LocalDate.of(1970, 1, 1);
             
-            MascotaDAO masDao = new MascotaDAO() {};
-            List<MascotaDTO> listaMas = new ArrayList<>();
+           //MascotaDAO masDao = new MascotaDAO() {};
+           //List<MascotaDTO> listaMas = new ArrayList<>();
             
            // listaMas.add(new MascotaDTO(1,"pepe",123,2.3,fechaNac,"tipoGato",0));            
             
-            MascotaDTO mascota = masDao.buscarMascota(1);
-            System.out.println(mascota);
+           // MascotaDTO mascota = masDao.buscarMascota(1);
+           // System.out.println(mascota);
     }
 }

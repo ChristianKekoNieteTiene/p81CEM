@@ -24,7 +24,7 @@ import modelos.MascotaDTO;
     }
 
     @Override
-    public List<MascotaDTO> buscarMascotas() throws SQLException {
+    public List<MascotaDTO> getBuscarMascotas() throws SQLException {
         List<MascotaDTO> lista = new ArrayList<>();
 
         try (Statement st = con.createStatement()) {
@@ -47,7 +47,7 @@ import modelos.MascotaDTO;
     }
 
     @Override
-    public MascotaDTO buscarMascota(int pkMascota) throws SQLException {
+    public MascotaDTO getBuscarMascota(int pkMascota) throws SQLException {
 
         MascotaDTO mascota = null;
         String sql = "SELECT * FROM mascota WHERE id = ?";
@@ -147,13 +147,16 @@ import modelos.MascotaDTO;
     }
 
     // método que permite obtener todas las mascotas tratadas por un veterinario, según su id.
-    public List<MascotaDTO> getMascotasVet(Integer idVeterinario) throws SQLException {
+    
+    @Override
+    public List<MascotaDTO> getMascotasVet(int pkVet) throws SQLException {
+        
         List<MascotaDTO> lista = new ArrayList<>();
         
         String sql = "SELECT * FROM mascota WHERE idVet = ?";
         
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
-            stmt.setInt(1, idVeterinario);
+            stmt.setInt(1, pkVet);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 MascotaDTO m = new MascotaDTO();

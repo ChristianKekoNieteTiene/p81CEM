@@ -11,7 +11,7 @@ import java.util.List;
 public interface IVeterinario {
     
     // Método para obtener todos los registros de la tabla
-    List<VeterinarioDTO> getAll() throws SQLException;
+    List<VeterinarioDTO> getVeterinarios() throws SQLException;
     
     // metodo buscar veterinario por su id
     VeterinarioDTO buscarVeterinario(int pkVet) throws SQLException;
