@@ -1,6 +1,7 @@
 
 package modelos;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -14,11 +15,11 @@ public class MascotaDTO {
     private String nombre;
     private int nChip;
     private double peso;
-    private LocalDate fechNac;
+    private Date fechNac;
     private String tipo;
-    private int idVet;
+    private Integer idVet;
 
-    public MascotaDTO(int id, String nombre, int nChip, double peso, LocalDate fechNac, String tipo, int idVet) {
+    public MascotaDTO(int id, String nombre, int nChip, double peso, Date fechNac, String tipo, Integer idVet) {
         this.id = id;
         this.nombre = nombre;
         this.nChip = nChip;
@@ -63,11 +64,11 @@ public class MascotaDTO {
         this.peso = peso;
     }
 
-    public LocalDate getFechNac() {
+    public Date getFechNac() {
         return fechNac;
     }
 
-    public void setFechNac(LocalDate fechNac) {
+    public void setFechNac(Date fechNac) {
         this.fechNac = fechNac;
     }
 
@@ -79,11 +80,11 @@ public class MascotaDTO {
         this.tipo = tipo;
     }
 
-    public int getIdVet() {
+    public Integer getIdVet() {
         return idVet;
     }
 
-    public void setIdVet(int idVet) {
+    public void setIdVet(Integer idVet) {
         this.idVet = idVet;
     }
 

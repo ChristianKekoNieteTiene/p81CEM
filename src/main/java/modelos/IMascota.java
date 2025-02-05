@@ -11,7 +11,7 @@ import java.util.List;
 public interface IMascota {
     
     // Método para obtener todos los registros de la tabla
-    List<MascotaDTO> getAll() throws SQLException;
+    List<MascotaDTO> buscarMascotas() throws SQLException;
     
     // metodo buscar mascota por su id
     MascotaDTO buscarMascota(int pkMascota) throws SQLException;
