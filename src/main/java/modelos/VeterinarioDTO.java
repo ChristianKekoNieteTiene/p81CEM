@@ -129,7 +129,7 @@ public class VeterinarioDTO {
         sb.append(", dirVet=").append(dirVet);
         sb.append(", telVet=").append(telVet);
         sb.append(", emailVet=").append(emailVet);
-        sb.append('}');
+        sb.append('}'+"\n");
         return sb.toString();
     }
     

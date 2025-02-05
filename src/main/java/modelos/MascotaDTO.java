@@ -144,7 +144,7 @@ public class MascotaDTO {
         sb.append(", fechNac=").append(fechNac);
         sb.append(", tipo=").append(tipo);
         sb.append(", idVet=").append(idVet);
-        sb.append('}');
+        sb.append('}'+"\n");
         return sb.toString();
     }
     
