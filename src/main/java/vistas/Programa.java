@@ -160,7 +160,8 @@ public class Programa {
 
     // Agregar un nuevo veterinario
     private static void agregarVeterinario() throws SQLException {
-
+        
+        int id = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID vet:"));
         String nif = JOptionPane.showInputDialog("Ingrese NIF del veterinario:");
         String nombre = JOptionPane.showInputDialog("Ingrese nombre del veterinario:");
         String direccion = JOptionPane.showInputDialog("Ingrese dirección del veterinario:");
@@ -168,6 +169,7 @@ public class Programa {
         String email = JOptionPane.showInputDialog("Ingrese email del veterinario:");
 
         VeterinarioDTO nuevoVeterinario = new VeterinarioDTO();
+        nuevoVeterinario.setIdVet(id);
         nuevoVeterinario.setNifVet(nif);
         nuevoVeterinario.setNomVet(nombre);
         nuevoVeterinario.setDirVet(direccion);
