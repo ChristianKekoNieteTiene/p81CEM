@@ -120,8 +120,10 @@ public class Programa {
     //agrega 1 masc
     private static void agregarMascota() throws SQLException {
         try {
+            int id = Integer.parseInt(JOptionPane.showInputDialog("Ingrese ID:"));
+            
             int numChip = Integer.parseInt(JOptionPane.showInputDialog("Ingrese número de chip:"));
-
+                        
             String nombre = JOptionPane.showInputDialog("Ingrese nombre de la mascota:");
 
             double peso = Double.parseDouble(JOptionPane.showInputDialog("Ingrese peso de la mascota (double):"));
@@ -131,18 +133,20 @@ public class Programa {
 
             String tipo = JOptionPane.showInputDialog("Ingrese tipo de mascota (perro, gato, otros):");
 
-            Integer idVeterinario = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del veterinario (deje vacio si no tiene):"));
+            Integer idVeterinario = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del veterinario (escriba 0 si no tiene):"));
 
             // Crear objeto de Mascota
             MascotaDTO nuevaMascota = new MascotaDTO();
+            nuevaMascota.setId(id);
+            nuevaMascota.setnChip(numChip);
             nuevaMascota.setNombre(nombre);
-            nuevaMascota.setTipo(tipo);
             nuevaMascota.setPeso(peso);
             nuevaMascota.setFechNac(fechaNacimiento);
-            nuevaMascota.setnChip(numChip);
+            nuevaMascota.setTipo(tipo);
             nuevaMascota.setIdVet(idVeterinario);
 
             int mascotaIns = MascotaDAO.insertMasc(nuevaMascota);
+            
             if (mascotaIns > 0) {
                 JOptionPane.showMessageDialog(null, "Mascota agregada exitosamente.");
             } else {

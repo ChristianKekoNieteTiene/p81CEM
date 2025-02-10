@@ -131,11 +131,8 @@ public class VeterinarioDAO implements IVeterinario {
             // La persona a actualizar no existe
             return numFilas;
         } else {
-            // Instanciamos el objeto PreparedStatement para inserción
-            // de datos. Sentencia parametrizada
+            
             try (PreparedStatement prest = con.prepareStatement(sql)) {
-
-                // Establecemos los parámetros de la sentencia
                 
                 prest.setString(1, nuevosDatos.getNifVet());
                 prest.setString(2, nuevosDatos.getNomVet());
@@ -157,12 +154,10 @@ public class VeterinarioDAO implements IVeterinario {
 
         String sql = "delete from veterinario where id = ?";
 
-        // Sentencia parametrizada
         try (PreparedStatement prest = con.prepareStatement(sql)) {
 
-            // Establecemos los parámetros de la sentencia
             prest.setInt(1, pkVet);
-            // Ejecutamos la sentencia
+            
             numFilas = prest.executeUpdate();
         }
         return numFilas;

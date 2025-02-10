@@ -2,13 +2,13 @@ package daw;
 
 import controladores.MascotaDAO;
 import controladores.VeterinarioDAO;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import modelos.VeterinarioDTO;
 import java.time.LocalDate;
 import modelos.MascotaDTO;
-
 
 /**
  *
@@ -18,8 +18,8 @@ public class MainPruebas {
 
     public static void main(String[] args) throws SQLException {
 
-//        VeterinarioDAO vetDao = new VeterinarioDAO();
-//        List<VeterinarioDTO> listaVet = new ArrayList<>();
+        VeterinarioDAO vetDao = new VeterinarioDAO();
+        List<VeterinarioDTO> listaVet = new ArrayList<>();
 //
 //        listaVet.add(new VeterinarioDTO(10, "hugo", "niffff", "direcc", "teleff", "email@gmail.com"));
 //
@@ -51,16 +51,24 @@ public class MainPruebas {
 //        System.out.println("Nº personas borradas "
 //                + vetDao.deleteVeterinario(10));
 
-          
-            
-           //LocalDate fechaNac = LocalDate.of(1970, 1, 1);
-            
-           //MascotaDAO masDao = new MascotaDAO() {};
-           //List<MascotaDTO> listaMas = new ArrayList<>();
-            
-           // listaMas.add(new MascotaDTO(1,"pepe",123,2.3,fechaNac,"tipoGato",0));            
-            
-           // MascotaDTO mascota = masDao.buscarMascota(1);
-           // System.out.println(mascota);
+        Date fechaNac = Date.valueOf(LocalDate.EPOCH);
+
+        MascotaDAO masDao = new MascotaDAO();
+
+        List<MascotaDAO> listaMas = new ArrayList<>();
+        listaMas.add(masDao);
+
+//           // mostrar 1 mascota
+//           MascotaDTO mascota = masDao.getBuscarMascota(1);
+//           System.out.println(mascota);
+//           
+//           // todas las mascotas
+//           List<MascotaDTO> nuevaLista = masDao.getBuscarMascotas();
+//           
+//           System.out.println("-------- Lista con datos recogidos desde la B.D -------------");
+//           nuevaLista.forEach(System.out::println);
+        // insertar mascota
+        System.out.println("insertando: " + masDao.insertMasc(new MascotaDTO(11, "nombre", 100, 2.2, null, "tipo", null)));
+        System.out.println(masDao.getBuscarMascota(11));
     }
 }
