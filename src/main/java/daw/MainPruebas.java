@@ -39,11 +39,11 @@ public class MainPruebas {
 //        System.out.println("Nº personas insertadas " + vetDao.insertVet((new VeterinarioDTO(10, "hugo", "niffff", "direcc", "teleff", "email@gmail.com"))));
 //
 //        System.out.println("");
-//
-//        System.out.println("Modificación de la persona con pk 10");
-//        VeterinarioDTO v1 = new VeterinarioDTO(10, "nif", "NuevoNombre", "direc", "tel", "@gmailsss");
-//        System.out.println("Nº Personas modificadas "
-//                + vetDao.updateVet(10, v1));
+// System.out.println("Modificación de la persona con pk 10")
+        System.out.println("Modificación de la persona con pk 10");
+        VeterinarioDTO v1 = new VeterinarioDTO(10, "nif", "NuevoNombre", "direc", "tel", "@gmailsss");
+        System.out.println("Nº Personas modificadas "
+                + vetDao.updateVet(10, v1));
 //
 //        System.out.println("");
 //
@@ -51,12 +51,12 @@ public class MainPruebas {
 //        System.out.println("Nº personas borradas "
 //                + vetDao.deleteVeterinario(10));
 
-        Date fechaNac = Date.valueOf(LocalDate.EPOCH);
-
-        MascotaDAO masDao = new MascotaDAO();
-
-        List<MascotaDAO> listaMas = new ArrayList<>();
-        listaMas.add(masDao);
+    //        Date fechaNac = Date.valueOf(LocalDate.EPOCH);
+    //
+    //        MascotaDAO masDao = new MascotaDAO();
+    //
+    //        List<MascotaDAO> listaMas = new ArrayList<>();
+    //        listaMas.add(masDao);
 
 //           // mostrar 1 mascota
 //           MascotaDTO mascota = masDao.getBuscarMascota(1);
@@ -68,7 +68,8 @@ public class MainPruebas {
 //           System.out.println("-------- Lista con datos recogidos desde la B.D -------------");
 //           nuevaLista.forEach(System.out::println);
         // insertar mascota
-        System.out.println("insertando: " + masDao.insertMasc(new MascotaDTO(11, "nombre", 100, 2.2, null, "tipo", null)));
-        System.out.println(masDao.getBuscarMascota(11));
+//        System.out.println("insertando: " + masDao.insertMasc(new MascotaDTO(11, "nombre", 100, 2.2, null, "tipo", null)));
+//        System.out.println(masDao.getBuscarMascota(11));
+        
     }
 }

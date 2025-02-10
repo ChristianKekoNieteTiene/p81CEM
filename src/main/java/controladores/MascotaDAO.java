@@ -114,7 +114,7 @@ public class MascotaDAO implements IMascota {
     public Integer insertMascota(List<MascotaDTO> lista) throws SQLException {
         int rows = 0;
         for (MascotaDTO m : lista) {
-            rows += insertMascota((List<MascotaDTO>) m); //hago casting a mascota
+            rows += insertMascota((List<MascotaDTO>) m);
         }
         return rows;
     }
@@ -130,8 +130,7 @@ public class MascotaDAO implements IMascota {
             prest.setDouble(3, nuevosDatos.getPeso());
 
             if (nuevosDatos.getFechNac() != null) {
-                java.sql.Date sqlDate = new java.sql.Date(nuevosDatos.getFechNac().getTime());
-                prest.setDate(4, sqlDate);
+                prest.setDate(4, nuevosDatos.getFechNac());
             } else {
                 prest.setNull(4, java.sql.Types.DATE);  //Asignamos null a la fecha
             }
