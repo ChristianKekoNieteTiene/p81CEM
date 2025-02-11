@@ -38,7 +38,7 @@ public class MascotaDAO implements IMascota {
                 m.setPeso(res.getDouble("peso"));
                 m.setFechNac(res.getDate("fechaNac"));
                 m.setTipo(res.getString("tipo"));
-                m.setIdVet(res.getInt("idVet"));
+                m.setIdVet((Integer)res.getObject("idVet"));
 
                 lista.add(m);
             }
@@ -82,31 +82,35 @@ public class MascotaDAO implements IMascota {
             // No se hace la inserción
             return numFilas;
         } else {
-            try (PreparedStatement prest = con.prepareStatement(sql)) {
+            try (PreparedStatement insertar = con.prepareStatement(sql)) {
 
-                prest.setInt(1, newMasc.getId());
-                prest.setInt(2, newMasc.getnChip());
-                prest.setString(3, newMasc.getNombre());
-                prest.setDouble(4, newMasc.getPeso());
+                insertar.setInt(1, newMasc.getId());
+                insertar.setInt(2, newMasc.getnChip());
+                insertar.setString(3, newMasc.getNombre());
+                insertar.setDouble(4, newMasc.getPeso());
                 // (esto es por si meten una fecha nula)
                 if (newMasc.getFechNac() != null) {
                     //si tiene la inserta
-                    prest.setDate(5, newMasc.getFechNac());
+                    insertar.setDate(5, newMasc.getFechNac());
                 } else {
                     //sino, asignamos NULL a la base de datos
-                    prest.setNull(5, java.sql.Types.DATE);
+                    insertar.setNull(5, java.sql.Types.DATE);
                 }
-                prest.setString(6, newMasc.getTipo());
+                insertar.setString(6, newMasc.getTipo());
                 // Manejo del id_veterinario (puede ser null)
 
                 Integer idVeterinario = newMasc.getIdVet();
-                if (idVeterinario != null) {
-                    prest.setObject(7, idVeterinario); // Si idVeterinario no es null, lo asignamos como entero
+                
+                if (idVeterinario > 0) {
+                    
+                    insertar.setObject(7, idVeterinario); // Si idVeterinario no es null, lo asignamos como entero
+                   
                 } else {
-                    prest.setNull(7, java.sql.Types.INTEGER);  // Si idVeterinario es null, asignamos NULL en la base de datos
+                    
+                    insertar.setObject(7, null);  // Si idVeterinario es null, asignamos NULL en la base de datos
                 }
 
-                numFilas = prest.executeUpdate();
+                numFilas = insertar.executeUpdate();
             }
             return numFilas;
         }
@@ -125,7 +129,7 @@ public class MascotaDAO implements IMascota {
 
         String sql = "UPDATE mascota SET numChip = ?, nombre = ?, peso = ?, fechaNac = ?, tipo = ?, idVet = ? WHERE id = ?";
         try (PreparedStatement prest = con.prepareStatement(sql)) {
-
+            
             prest.setInt(1, nuevosDatos.getnChip());
             prest.setString(2, nuevosDatos.getNombre());
             prest.setDouble(3, nuevosDatos.getPeso());
