@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import modelos.IMascota;
 import modelos.MascotaDTO;
 
@@ -122,7 +123,7 @@ public class MascotaDAO implements IMascota {
     @Override
     public int updateMasc(int pk, MascotaDTO nuevosDatos) throws SQLException {
 
-        String sql = "UPDATE mascota SET numChip = ?, nombre = ?, peso = ?, fechaNa = ?, tipo = ?, idVet = ? WHERE id = ?";
+        String sql = "UPDATE mascota SET numChip = ?, nombre = ?, peso = ?, fechaNac = ?, tipo = ?, idVet = ? WHERE id = ?";
         try (PreparedStatement prest = con.prepareStatement(sql)) {
 
             prest.setInt(1, nuevosDatos.getnChip());
@@ -145,12 +146,23 @@ public class MascotaDAO implements IMascota {
 
     @Override
     public int deleteMasc(int pkMasc) throws SQLException {
-
-        String sql = "delete from mascota where pkMasc";
-        try (Statement stmt = con.createStatement()) {
-            return stmt.executeUpdate(sql);
+        
+        int numFilas=0;
+        
+        String sql = "delete from mascota where id=?";
+        
+        if (getBuscarMascota(pkMasc) != null) {
+        
+            try (PreparedStatement deleteMascota = con.prepareStatement(sql)) {
+                
+                deleteMascota.setInt(1, pkMasc);
+                        
+                numFilas = deleteMascota.executeUpdate();
+            }   
+        }else{
+            JOptionPane.showMessageDialog(null, "No se ha encontrado la mascota");
         }
-
+        return numFilas;
     }
 
     // método que permite obtener todas las mascotas tratadas por un veterinario, según su id.
@@ -159,11 +171,13 @@ public class MascotaDAO implements IMascota {
 
         List<MascotaDTO> lista = new ArrayList<>();
 
-        String sql = "SELECT * FROM mascota WHERE idVet = ?";
+        String sql = "select * from mascota WHERE idVet = ?";
 
-        try (PreparedStatement stmt = con.prepareStatement(sql)) {
-            stmt.setInt(1, pkVet);
-            ResultSet rs = stmt.executeQuery();
+        try (PreparedStatement mascotasVet = con.prepareStatement(sql)) {
+            
+            mascotasVet.setInt(1, pkVet);
+            ResultSet rs = mascotasVet.executeQuery();
+            
             while (rs.next()) {
                 MascotaDTO m = new MascotaDTO();
                 m.setId(rs.getInt("id"));

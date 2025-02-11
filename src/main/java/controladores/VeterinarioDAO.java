@@ -155,16 +155,16 @@ public class VeterinarioDAO implements IVeterinario {
         
         if (buscarVeterinario(pkVet) != null) {
             
-            try (PreparedStatement updateMascotasPrest = con.prepareStatement(actualizaMas)) {
+            try (PreparedStatement deleteVet = con.prepareStatement(actualizaMas)) {
                 
-                updateMascotasPrest.setInt(1, pkVet);
-                numFilas = updateMascotasPrest.executeUpdate();
+                deleteVet.setInt(1, pkVet);
+                numFilas = deleteVet.executeUpdate();
             }
-            try (PreparedStatement prest = con.prepareStatement(sql)) {
+            try (PreparedStatement actMas = con.prepareStatement(sql)) {
 
-                prest.setInt(1, pkVet);
+                actMas.setInt(1, pkVet);
 
-                numFilas = prest.executeUpdate();
+                numFilas = actMas.executeUpdate();
             }
 
         }

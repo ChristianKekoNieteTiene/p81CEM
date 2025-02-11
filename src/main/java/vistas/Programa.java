@@ -27,11 +27,11 @@ public class Programa {
                         0. Salir
                         1. Lista de mascotas
                         2. Lista de veterinarios
-                        3. Buscar mascota
-                        4. Buscar veterinario
-                        5. Agregar mascota
-                        6. Agregar veterinario
-                        7. Asignar veterinario a mascota
+                        3. Lista de Mascotas de 1 Veterinario
+                        4. Buscar mascota
+                        5. Buscar veterinario
+                        6. Agregar mascota
+                        7. Agregar veterinario
                         8. Actualizar mascota
                         9. Actualizar veterinario
                         10. Eliminar mascota
@@ -54,15 +54,15 @@ public class Programa {
                     case 2 ->
                         listaVeterinarios();
                     case 3 ->
-                        buscarMascota();
+                        listaMascVet();
                     case 4 ->
-                        buscarVeterinario();
+                        buscarMascota();
                     case 5 ->
-                        agregarMascota();
+                        buscarVeterinario();
                     case 6 ->
-                        agregarVeterinario();
+                        agregarMascota();
                     case 7 ->
-                        asignarVeterinario();
+                        agregarVeterinario();
                     case 8 ->
                         actualizarMascota();
                     case 9 ->
@@ -96,9 +96,25 @@ public class Programa {
             List<VeterinarioDTO> veterinarios = VeterinarioDAO.getVeterinarios();
 
             JOptionPane.showMessageDialog(null, veterinarios);
+            
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al listar los veterinarios: " + e.getMessage());
         }
+    }
+    
+    private static void listaMascVet() throws SQLException{
+        
+        Integer idVet = Integer.parseInt(JOptionPane.showInputDialog("Introduce el id de Veterinario"));
+        
+        try {
+            List<MascotaDTO> mascotas = MascotaDAO.getMascotasVet(idVet);
+
+            JOptionPane.showMessageDialog(null, mascotas);
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al listar los veterinarios: " + e.getMessage());
+        }
+        
     }
 
     //busca 1 mascta
@@ -187,26 +203,12 @@ public class Programa {
 
     }
 
-    // Asignar un veterinario a una mascota
-    private static void asignarVeterinario() throws SQLException {
-
-        int idMascota = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID de la mascota a asignar:"));
-        int idVeterinario = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del veterinario a asignar:"));
-        MascotaDTO mascota = MascotaDAO.getBuscarMascota(idMascota);
-        if (mascota != null) {
-            mascota.setIdVet(idVeterinario);
-            MascotaDAO.updateMasc(idMascota, mascota);
-            JOptionPane.showMessageDialog(null, "Veterinario asignado a la mascota.");
-        } else {
-            JOptionPane.showMessageDialog(null, "La mascota no existe.");
-        }
-    }
-
     // Actualizar una mascota
     private static void actualizarMascota() {
         try {
             int idMascota = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID de la mascota a actualizar:"));
             MascotaDTO mascota = MascotaDAO.getBuscarMascota(idMascota);
+            
             if (mascota != null) {
                 
                 int nuevoChip = Integer.parseInt(JOptionPane.showInputDialog("Ingrese nuevo chip:"));
@@ -222,6 +224,7 @@ public class Programa {
                 mascota.setFechNac(nuevaFecha);
                 mascota.setTipo(nuevoTipo);
                 mascota.setIdVet(nuevoVet);
+                
                 MascotaDAO.updateMasc(idMascota, mascota);
                 JOptionPane.showMessageDialog(null, "Mascota actualizada exitosamente.");
                 
@@ -235,6 +238,7 @@ public class Programa {
 
     // Actualizar un veterinario
     private static void actualizarVeterinario() {
+        
         try {
             int idVeterinario = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del veterinario a actualizar:"));
             VeterinarioDTO veterinario = VeterinarioDAO.buscarVeterinario(idVeterinario);
@@ -263,6 +267,7 @@ public class Programa {
 
         int idMascota = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID de la mascota a eliminar:"));
         int mascota = MascotaDAO.deleteMasc(idMascota);
+        
         if (mascota > 0) {
             JOptionPane.showMessageDialog(null, "Mascota eliminada exitosamente.");
         } else {
