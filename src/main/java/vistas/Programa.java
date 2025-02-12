@@ -3,9 +3,6 @@ package vistas;
 import java.sql.SQLException;
 import controladores.MascotaDAO;
 import controladores.VeterinarioDAO;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.util.Iterator;
 import java.util.List;
 import modelos.MascotaDTO;
 import modelos.VeterinarioDTO;
@@ -167,7 +164,7 @@ public class Programa {
 
             Integer idVeterinario = Integer.valueOf(JOptionPane.showInputDialog("Ingrese el ID del veterinario (escriba 0 si no tiene):"));
 
-            // Crear objeto de Mascota
+            
             MascotaDTO nuevaMascota = new MascotaDTO();
             nuevaMascota.setId(id);
             nuevaMascota.setnChip(numChip);
@@ -283,7 +280,7 @@ public class Programa {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al actualizar la mascota: " + e.getMessage());
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "El formato del peso o ID de la mascota no es válido.");
+            JOptionPane.showMessageDialog(null, "No has introducido datos");
         }
     }
 
@@ -331,7 +328,7 @@ public class Programa {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al actualizar el veterinario");
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "El ID del veterinario debe ser un número entero.");
+            JOptionPane.showMessageDialog(null, "No has introducido datos");
         }
     
     }
